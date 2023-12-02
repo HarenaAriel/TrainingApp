@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrainingApp.MainPage"
+             xmlns:vm="clr-namespace:TrainingApp.ViewModel"
+             xmlns:model="clr-namespace:TrainingApp.Models"
+             x:DataType="vm:MainPageViewModel"
+             Title="{Binding Title}">
+
+  <Grid RowDefinitions="0.25*,*, .125*">
+
+    <CollectionView Grid.Row="0" ItemsLayout="HorizontalList" VerticalOptions="Start" ItemsSource="{Binding CategoryModels}">
+      <CollectionView.ItemTemplate>
+        <DataTemplate x:DataType="{x:Type model:CategoryModel}">
+          <VerticalStackLayout>
+            <Frame Margin="5" HeightRequest="100" WidthRequest="250">
+              <Label Text="{Binding CategoryName}" FontSize="Title"/>
+            </Frame>
+          </VerticalStackLayout>
+        </DataTemplate>
+      </CollectionView.ItemTemplate>
+    </CollectionView>
+
+    <CollectionView Grid.Row="1" ItemsLayout="VerticalList" VerticalOptions="Center" ItemsSource="{Binding ProductModels}" SelectedItem="{Binding Product}" SelectionMode="None">
+      <CollectionView.Header>
+        <HorizontalStackLayout HorizontalOptions="Center">
+          <Label Text="Products" FontSize="Title" FontAttributes="Bold"/>
+        </HorizontalStackLayout>
+      </CollectionView.Header>
+      <CollectionView.ItemTemplate>
+        <DataTemplate x:DataType="{x:Type model:ProductModel}">
+          <VerticalStackLayout>
+            <Frame Margin="5" HeightRequest="125">
+              <Frame.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainPageViewModel}}, Path=GoToDetailsCommand}" 
+                                      CommandParameter="{Binding .}"/>
+              </Frame.GestureRecognizers>
+              <VerticalStackLayout>
+                <Label Text="{Binding Name}" FontSize="Large"/>
+                <Label Text="{Binding Category}" FontSize="Caption"/>
+              </VerticalStackLayout>
+            </Frame>
+          </VerticalStackLayout>
+        </DataTemplate>
+      </CollectionView.ItemTemplate>
+    </CollectionView>
+
+    <HorizontalStackLayout Grid.Row="2" VerticalOptions="Center" Margin="5">
+      <Button Text="Load Data" Command="{Binding GoToManageProductCommand}"/>
+    </HorizontalStackLayout>
+
+  </Grid>
+
+</ContentPage>
