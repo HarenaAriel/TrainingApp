@@ -4,15 +4,37 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:TrainingApp"
-  xmlns:view="clr-namespace:TrainingApp.Views"
-    Shell.FlyoutBehavior="Disabled">
+    xmlns:view="clr-namespace:TrainingApp.Views"
+  xmlns:helpers="clr-namespace:TrainingApp.Helpers.FlyoutShell"
+  Shell.FlyoutBehavior="Flyout">
 
-  <ShellContent
+  <!--<ShellContent
       Shell.NavBarIsVisible="true"
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage">
 
-  </ShellContent>
+  </ShellContent>-->
+
+  <Shell.FlyoutHeader>
+    <Label Text="Test" />
+  </Shell.FlyoutHeader>
+
+  <Shell.FlyoutContent>
+    <helpers:ShellContentView/>
+  </Shell.FlyoutContent>
+
+  <Shell.FlyoutFooter>
+    <helpers:ShellFoooterView/>
+  </Shell.FlyoutFooter>
+
+  <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+    <Tab Title="About" Icon="tab_info.png">
+      <ShellContent Route="MainPage" ContentTemplate="{DataTemplate view:ManageProductPage}" />
+    </Tab>
+    <Tab Title="Browse" Icon="tab_home_on.png">
+      <ShellContent Route="ManageProductPage" ContentTemplate="{DataTemplate local:MainPage}" />
+    </Tab>
+  </FlyoutItem>
 
 </Shell>

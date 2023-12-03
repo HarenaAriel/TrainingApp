@@ -7,7 +7,7 @@
              x:DataType="vm:MainPageViewModel"
              Title="{Binding Title}">
 
-  <Grid RowDefinitions="0.25*,*, .125*">
+  <Grid RowDefinitions="0.25*,*">
 
     <CollectionView Grid.Row="0" ItemsLayout="HorizontalList" VerticalOptions="Start" ItemsSource="{Binding CategoryModels}">
       <CollectionView.ItemTemplate>
@@ -44,10 +44,6 @@
         </DataTemplate>
       </CollectionView.ItemTemplate>
     </CollectionView>
-
-    <HorizontalStackLayout Grid.Row="2" VerticalOptions="Center" Margin="5">
-      <Button Text="Load Data" Command="{Binding GoToManageProductCommand}"/>
-    </HorizontalStackLayout>
 
   </Grid>
 
